@@ -67,10 +67,11 @@ namespace Unicode {
 			this->BackColor = System::Drawing::Color::Black;
 			this->DoubleBuffered = true;
 			this->ForeColor = System::Drawing::Color::Lime;
+			this->KeyPreview = true;
 			this->Name = L"Form1";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
-			this->ResizeBegin += gcnew System::EventHandler(this, &Form1::Form1_ResizeBegin);
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Form1::Form1_Paint);
+			this->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Form1::Form1_KeyPress);
 			this->ResumeLayout(false);
 
 		}
@@ -103,7 +104,11 @@ namespace Unicode {
 					}
 				e->Graphics->Flush();
 			 }
-	private: System::Void Form1_ResizeBegin(System::Object^  sender, System::EventArgs^  e) {
+
+
+	private: System::Void Form1_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
+				 if(e->KeyChar == '\033')
+					 exit(0);
 			 }
 	};
 }
